@@ -61,8 +61,9 @@ while True:
   #image = caffe.io.load_image(sys.argv[2])
   image = caffe.io.load_image(file_name)
 
-  start_time = time.time()
+
   transformed_image = transformer.preprocess('data', image)
+  start_time = time.time()
   net.blobs['data'].data[...] = transformed_image
   output = net.forward()
   elapsed = time.time() - start_time
