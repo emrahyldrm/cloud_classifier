@@ -5,7 +5,7 @@ image_path = "cat.jpg"
 if len(sys.argv) > 1:
 	image_path = sys.argv[1]
 
-path = "/home/host/SE/imagenet_demo/classifier_fifo"
+path = "/tmp/classifier_fifo"
 fifo = open(path, "w")
 fifo.write(image_path)
 fifo.close()

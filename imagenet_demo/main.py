@@ -8,7 +8,7 @@ sys.path.append("/home/host/caffe/python")
 import caffe
 
 
-path = "/home/host/SE/imagenet_demo/classifier_fifo"
+path = "/tmp/classifier_fifo"
 print path in os.listdir(".")
 
 if path in os.listdir("."):
@@ -45,6 +45,8 @@ transformer.set_channel_swap('data', (2,1,0))  # swap channels from RGB to BGR
 net.blobs['data'].reshape(1,        # batch size
                           3,         # 3-channel (BGR) images
                           227, 227)  # image size is 227x227
+
+
 
 
 while True:
