@@ -88,6 +88,6 @@ while True:
 
   
   fifo = open(path, "w")
-  wr = p_label + "-" + str(elapsed)
+  wr = str(output_prob[p_class]) + "-" + p_label + "-" + str(elapsed)
   fifo.write(wr)
   fifo.close()

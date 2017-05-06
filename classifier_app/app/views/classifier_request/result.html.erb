@@ -1,23 +1,25 @@
 <div class="center jumbotron">
-	<h3> Classification Results ( <%= @elapsed %> msec )</h3>
+  <h3> <%= @name %> </h3>
+  <hr>
 
-	<table border="0px"> 
+  <table border="0px">
 		<tr> 
 			<td rowspan = "2" class = "col"> <%= image_tag("classifier_images/" + @name, class: "img-rounded" , alt: "Uploaded", height: 360, width: 640) %> </td>
-			<td class = "col" height="25px"> 
-				<h4> <%= @name %> </h4> 
-			</td>
+			<td class = "col" height="25px">
+        <h4> Classification Results ( <%= @elapsed %> msec )</h4>
+      </td>
 		</tr>
 		<tr>
 			<td class = "col">
 				<table>
-				<% c = 1 %>
-				<% @res.each do |x|  %>
-						: <%= x %> :
-						<tr></tr>
-					<% c += 1 %>
-				<% end %>
+          <% c = 1 %>
+          <% @res.each do |x|  %>
+              : <%= x %> : <br>
+            <% c += 1 %>
+          <% end %>
 				</table>
+        <br>
+				<p> Probability : <%= @prob %></p>
 			</td>
 
 		</tr>

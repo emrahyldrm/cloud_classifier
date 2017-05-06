@@ -28,8 +28,9 @@ class ClassifierRequestController < ApplicationController
     output = stdout
     output["\n"] = ""
     r = output.split("-")
-    @res = r[0].split(", ")
-    @elapsed = r[1][0..3]
+    @prob = r[0][0..4]
+    @res = r[1].split(", ")
+    @elapsed = r[2][0..3]
 
     Request.new(user_id: current_user[:id], name: @name).save
   end
