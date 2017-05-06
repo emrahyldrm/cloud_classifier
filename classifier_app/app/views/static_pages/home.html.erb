@@ -1,0 +1,26 @@
+<div class="container" >
+  <div class="center jumbotron">
+    <div class="container" >
+    <br><br>
+    <h1>Cloud Classifier App</h1>by Team Trappist-1
+    <br><br>
+      <p>
+        A platform for classifying images. Alexnet was used as pretrained model.
+      </p>
+
+      <% if logged_in? %>
+          <%= link_to "You can download class names here!", :action => :down %>
+          <br><br>
+    	<%=		link_to "Upload Image", request_path, class: "btn btn-lg btn-warning" %>
+    <% else %>
+    	<%=		link_to "Log in !", login_path, class: "btn btn-lg  btn-info" %>
+      <%=		link_to "Sign up now!", signup_path, class: "btn btn-lg btn-success" %>
+    <% end %>
+      <br>
+
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<footer class="footer">
+  <center>
+    <%= link_to image_tag("tutor.png", alt:"Book Logo", width: 64, height: 64), 'https://www.railstutorial.org/book' %>
+    &nbsp
+    <%= link_to image_tag("rails.png", alt: "Rails logo", width: 64, height: 64), 'http://rubyonrails.org/' %>
+    &nbsp
+    <%= link_to image_tag("caffe.png", alt: "Caffe Logo", height: 64), 'http://caffe.berkeleyvision.org/' %>
+    &nbsp
+    <%= link_to image_tag("alexnet.png", alt: "Alexnet Logo", height: 64), 'https://en.wikipedia.org/wiki/AlexNet' %>
+    &nbsp
+    <%= link_to image_tag("gtu.png", alt:"GTU Logo", width: 64, height: 64), 'http://www.gtu.edu.tr' %>
+  </center>
+
+  <nav>
+    <ul>
+      <li><%= link_to "About",  about_path %></li>
+      <li><%= link_to "Contact", contact_path %></li>
+      <li><%= link_to "News", '#' %></li>
+    </ul>
+  </nav>
+</footer>
