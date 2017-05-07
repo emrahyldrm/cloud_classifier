@@ -2,20 +2,36 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <h1>
-        <%= image_tag("profile.png", :alt => "profile", height: 128, width: 128) %>
-        <%= @user.name %>
-      </h1>
+      <table>
+        <tr>
+          <td><%= image_tag("profile.png", :alt => "profile", height: 128, width: 128) %></td>
+          <td>
+            Name   : <%= @user.name.to_s.upcase%><br>
+            Joined : <%= @user.created_at.to_s %>
+          </td>
+        </tr>
+      </table>
     </section>
   </aside>
 </div>
 
-<p> ALL REQUESTS</p>
-<table border = "1px">
-  <td>
-  <% @requests.each do |x| %>
-      <tr> <%= x.name.to_s + " " + x.created_at.to_s %> <td>
+<hr>
+
+<p><strong> ALL REQUESTS ( <%= @requests.length %> ) </strong></p>
+<table border = "2px">
+  <tr>
+    <td>IMAGE </td>
+    <td> NAME - DATE </td>
+    <td> RESULT </td>
+    <td> PROBABILITY </td>
+  </tr>
+  <% @requests.reverse_each do |x| %>
+      <tr>
+        <td><%=image_tag("classifier_images/" + x.name.to_s, :alt => "profile", height: 128, width: 128) %></td>
+        <td> <%= x.name.to_s + " " + x.created_at.to_s %> </td>
+        <td> <%= x.result.to_s %> </td>
+        <td> <%= x.prob.to_s %> </td>
+      </tr>
   <% end %>
-    </td>
 </table>
 

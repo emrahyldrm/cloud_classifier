@@ -32,7 +32,8 @@ class ClassifierRequestController < ApplicationController
     @res = r[1].split(", ")
     @elapsed = r[2][0..3]
 
-    Request.new(user_id: current_user[:id], name: @name).save
+    nr = Request.new(user_id: current_user[:id], name: @name, result: @res, prob: @prob)
+    nr.save
   end
 
 
