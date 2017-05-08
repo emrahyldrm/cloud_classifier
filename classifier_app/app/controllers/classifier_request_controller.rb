@@ -34,6 +34,7 @@ class ClassifierRequestController < ApplicationController
 
     nr = Request.new(user_id: current_user[:id], name: @name, result: @res, prob: @prob)
     nr.save
+    puts "SAVED"
   end
 
 
@@ -48,6 +49,7 @@ class ClassifierRequestController < ApplicationController
     	path = File.join(dir, name)
       File.open(path, "wb") { |f| f.write(params[:upload][:file].read) }   
       #@image_size = FastImage.size("http://stephensykes.com/images/ss.com_x.gif")
+      puts "FILE"
   		redirect_to result_path(img: name)
 
     # if this is a url rquest
@@ -64,7 +66,7 @@ class ClassifierRequestController < ApplicationController
           open(path, 'wb') do |file|
             file << open(url).read
           end
-
+          puts "URL"
           redirect_to result_path(img: name)
       else
         redirect_to request_path(error: 'url')

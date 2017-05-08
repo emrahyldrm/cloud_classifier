@@ -6,8 +6,8 @@
         <tr>
           <td><%= image_tag("profile.png", :alt => "profile", height: 128, width: 128) %></td>
           <td>
-            Name   : <%= @user.name.to_s.upcase%><br>
-            Joined : <%= @user.created_at.to_s %>
+            Name   : <%= @user.name.to_s.upcase %><br>
+            Joined : <%= @user.created_at.to_s  %>
           </td>
         </tr>
       </table>
@@ -17,21 +17,23 @@
 
 <hr>
 
-<p><strong> ALL REQUESTS ( <%= @requests.length %> ) </strong></p>
-<table border = "2px">
-  <tr>
-    <td>IMAGE </td>
-    <td> NAME - DATE </td>
-    <td> RESULT </td>
-    <td> PROBABILITY </td>
-  </tr>
-  <% @requests.reverse_each do |x| %>
+<center>
+<p><strong> ALL REQUESTS ( <%= @requests.length/2 %> ) </strong></p>
+  <% if @requests.length > 0 %>
+    <table border = "2px">
       <tr>
-        <td><%=image_tag("classifier_images/" + x.name.to_s, :alt => "profile", height: 128, width: 128) %></td>
-        <td> <%= x.name.to_s + " " + x.created_at.to_s %> </td>
-        <td> <%= x.result.to_s %> </td>
-        <td> <%= x.prob.to_s %> </td>
+        <td>IMAGE </td> <td> NAME </td> <td> DATE </td> <td> RESULT </td> <td> PROBABILITY </td>
       </tr>
+      <% (0..@requests.size-1).step(2).reverse_each do |i| %>
+          <% x = @requests[i] %>
+          <tr>
+            <td><%=image_tag("classifier_images/" + x.name.to_s, :alt => "profile", height: 128, width: 128) %></td>
+            <td> <%= x.name.to_s[0..-5] %> </td>
+            <td> <%= x.created_at.to_s %> </td>
+            <td> <%= x.result.to_s[1..-2] %> </td>
+            <td> <%= x.prob.to_s %> </td>
+          </tr>
+      <% end %>
+    </table>
   <% end %>
-</table>
-
+</center>
