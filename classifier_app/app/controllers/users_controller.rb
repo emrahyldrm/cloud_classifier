@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'pathname'
 
 class UsersController < ApplicationController
   def show
@@ -15,7 +16,10 @@ class UsersController < ApplicationController
     unless tag_ids.nil? then
       tag_ids.each do |tid| 
         r = Request.find_by(id: tid.to_i)
-        FileUtils.rm(Rails.root.to_s + "/app/assets/images/classifier_images/" + r.name)
+        path = Rails.root.to_s + "/app/assets/images/classifier_images/" + r.name
+        if Pathname.new(path).file? 
+          FileUtils.rm(path)
+        end
         r.destroy
         r = Request.find_by(id: tid.to_i+1)
         r.destroy
