@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
@@ -6,6 +8,21 @@ class UsersController < ApplicationController
   
   def new
   	@user = User.new
+  end
+
+  def del
+    tag_ids = params[:tag_ids]
+    unless tag_ids.nil? then
+      tag_ids.each do |tid| 
+        r = Request.find_by(id: tid.to_i)
+        FileUtils.rm(Rails.root.to_s + "/app/assets/images/classifier_images/" + r.name)
+        r.destroy
+        r = Request.find_by(id: tid.to_i+1)
+        r.destroy
+      end
+    end
+
+    redirect_to current_user
   end
 
   def create

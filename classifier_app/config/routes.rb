@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get    '/download', to: 'static_pages#down'
   get    '/signup',  to: 'users#new'
   post   '/signup',  to: 'users#create'
+  post   '/del',  to: 'users#del'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
