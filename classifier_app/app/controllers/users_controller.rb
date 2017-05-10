@@ -16,12 +16,10 @@ class UsersController < ApplicationController
     unless tag_ids.nil? then
       tag_ids.each do |tid| 
         r = Request.find_by(id: tid.to_i)
-        path = Rails.root.to_s + "/app/assets/images/classifier_images/" + r.name
+        path = Rails.root.to_s + $classifier_images_path + r.name
         if Pathname.new(path).file? 
           FileUtils.rm(path)
         end
-        r.destroy
-        r = Request.find_by(id: tid.to_i+1)
         r.destroy
       end
     end
@@ -33,7 +31,7 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
   	if @user.save
       log_in @user
-  		flash[:success] = "Welcome to the Sample App!"
+  		flash[:success] = "Welocome to Cloud Classifier!"
   		redirect_to @user
   	else
   		render 'new'

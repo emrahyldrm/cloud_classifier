@@ -17,7 +17,7 @@
 
 <hr>
 <center>
-<p><strong> ALL REQUESTS ( <%= @requests.length/2 %>   ) </strong></p>
+<p><strong> ALL REQUESTS ( <%= @requests.size %>   ) </strong></p>
   <% if @requests.length > 0 %>
     <%= form_tag({controller: "users", action: "del"}, multipart: true) do%>
     <table border = "2px">
@@ -29,8 +29,7 @@
         <td> RESULT </td> 
         <td> PROBABILITY </td>
       </tr>
-      <% (0..@requests.size-1).step(2).reverse_each do |i| %>
-          <% x = @requests[i] %>          
+      <% @requests.reverse_each do |x| %>            
           <tr>
             <td> <input type="checkbox" name="tag_ids[]" value=<%= x.id %> /> </td>
             <td><%=image_tag("classifier_images/" + x.name.to_s, :alt => "profile", height: 128, width: 128) %></td>
