@@ -19,7 +19,7 @@ class ClassifierRequestController < ApplicationController
   def result
   	@name = params[:img]
 
-    dir = Rails.root.to_s + "/app/assets/images/classifier_images/"
+    dir = Rails.root.to_s + $classifier_images_path
     classifier = Rails.root.to_s + "/../imagenet_demo/client.py"
     path = File.join(dir, @name)
     @call = "python " + classifier + " " + path
@@ -42,7 +42,7 @@ class ClassifierRequestController < ApplicationController
     # if an image uploaded
     if params[:upload] && params[:upload][:file] then
     	name = params[:upload][:file].original_filename
-    	dir = Rails.root.to_s + "/app/assets/images/classifier_images/"
+    	dir = Rails.root.to_s + $classifier_images_path
     	date = DateTime.now
     	name = date.strftime('%b_%d_%Y_%H_%M_%S_') + name
 
@@ -57,7 +57,7 @@ class ClassifierRequestController < ApplicationController
       url = params[:upload][:url]
 
       if url_valid?(url) then
-          dir = Rails.root.to_s + "/app/assets/images/classifier_images/"
+          dir = Rails.root.to_s + $classifier_images_path
           date = DateTime.now
           name = date.strftime('%b_%d_%Y_%H_%M_%S_url_request.jpg')
 
