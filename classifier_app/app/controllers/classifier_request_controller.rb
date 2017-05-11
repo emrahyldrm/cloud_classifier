@@ -1,5 +1,8 @@
 require 'open3'
 require 'open-uri'
+require 'fileutils'
+require 'pathname'
+
 
 class ClassifierRequestController < ApplicationController
 
@@ -18,11 +21,15 @@ class ClassifierRequestController < ApplicationController
   def image_valid?(path)
     begin
       FastImage.new(path,  :raise_on_failure=>true, ).type
-    rescue FastImage::UnknownImageType
-      false
+    rescue
+        if Pathname.new(path).file? 
+          FileUtils.rm(path)
+        end
+      return false
     end
-    true
+    return true
   end
+
 
   def result
   	@name = params[:img]
