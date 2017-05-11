@@ -20,7 +20,7 @@ class ClassifierRequestController < ApplicationController
 
   def image_valid?(path)
     begin
-      FastImage.new(path,  :raise_on_failure=>true, ).type
+      FastImage.type(path,  :raise_on_failure=>true)
     rescue
         if Pathname.new(path).file? 
           FileUtils.rm(path)
@@ -30,6 +30,19 @@ class ClassifierRequestController < ApplicationController
     return true
   end
 
+  def find_enlosing_image(path)
+    dim = FastImage.size(path)
+    cols = dim[0]
+    rows = dim[1]
+
+    if rows > 480
+      scale_f = rows / 480
+      rows = rows / scale_f
+      cols = cols / scale_f
+      Open3.capture3("convert -resize " + cols.to_s + "X" + rows.to_s + " " + path + " " + path)
+    end
+  end
+
 
   def result
   	@name = params[:img]
@@ -37,8 +50,11 @@ class ClassifierRequestController < ApplicationController
     dir = Rails.root.to_s + $classifier_images_path
     classifier = Rails.root.to_s + "/../imagenet_demo/client.py"
     path = File.join(dir, @name)
+    find_enlosing_image(path)
+
     @call = "python " + classifier + " " + path
     #x = system("python", classifier, path, out: $stdout, err: :out)
+
     stdout, stderr, status = Open3.capture3(@call)
     output = stdout
     output["\n"] = ""
@@ -46,6 +62,7 @@ class ClassifierRequestController < ApplicationController
     @prob = r[0][0..4]
     @res = r[1].split(", ")
     @elapsed = r[2][0..3]
+
 
     nr = Request.new(user_id: current_user[:id], name: @name, result: @res, prob: @prob)
     nr.save
