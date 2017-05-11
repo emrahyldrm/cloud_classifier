@@ -1,4 +1,18 @@
 <% provide(:title, @user.name) %>
+<script>
+  function toggleCheckbox(element) {
+    if (element.checked) {
+        $(':checkbox').each(function () {
+            this.checked = true;
+        });
+    } else {
+        $(':checkbox').each(function () {
+            this.checked = false;
+        });
+    }
+  };
+</script>
+
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
@@ -22,14 +36,14 @@
     <%= form_tag({controller: "users", action: "del"}, multipart: true) do%>
     <table border = "2px">
       <tr>
-        <td width = "5%">DELETE SELECT</td>
+        <td width = "5%"> <input type="checkbox" id="selectAll" value="selectAll" onchange="toggleCheckbox(this)"> </td>
         <td width = "11%">IMAGE </td> 
         <td> NAME </td> 
         <td> DATE </td> 
         <td> RESULT </td> 
         <td> PROBABILITY </td>
       </tr>
-      <% @requests.reverse_each do |x| %>            
+      <% @requests.reverse_each do |x| %>
           <tr>
             <td> <input type="checkbox" name="tag_ids[]" value=<%= x.id %> /> </td>
             <td><%=image_tag("classifier_images/" + x.name.to_s, :alt => "profile", height: 128, width: 128) %></td>
