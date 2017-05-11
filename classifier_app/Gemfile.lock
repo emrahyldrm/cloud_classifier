@@ -67,6 +67,7 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.7.0)
+    fastimage (2.1.0)
     ffi (1.9.18)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
@@ -186,6 +187,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   devise
+  fastimage
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
@@ -202,4 +204,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.14.4
+   1.14.6
