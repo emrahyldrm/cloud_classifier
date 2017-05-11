@@ -1,6 +1,5 @@
 require 'open3'
 require 'open-uri'
-#require 'fastimage'
 
 class ClassifierRequestController < ApplicationController
 
@@ -15,6 +14,15 @@ class ClassifierRequestController < ApplicationController
     end
   end
 
+
+  def image_valid?(path)
+    begin
+      FastImage.new(path,  :raise_on_failure=>true, ).type
+    rescue FastImage::UnknownImageType
+      false
+    end
+    true
+  end
 
   def result
   	@name = params[:img]
@@ -34,7 +42,6 @@ class ClassifierRequestController < ApplicationController
 
     nr = Request.new(user_id: current_user[:id], name: @name, result: @res, prob: @prob)
     nr.save
-    puts "SAVED"
   end
 
 
@@ -48,11 +55,15 @@ class ClassifierRequestController < ApplicationController
 
     	path = File.join(dir, name)
       File.open(path, "wb") { |f| f.write(params[:upload][:file].read) }   
-      #@image_size = FastImage.size("http://stephensykes.com/images/ss.com_x.gif")
-      puts "FILE"
-  		redirect_to result_path(img: name)
 
-    # if this is a url rquest
+      if image_valid?(path) then
+        redirect_to result_path(img: name)
+      else
+        redirect_to request_path(error: 'n_val')
+      end
+
+
+      # if this is a url rquest
     elsif  (params[:upload] && params[:upload][:url]) && params[:upload][:url] != 0 && params[:upload][:url] != ".. or enter an url here" then      
       url = params[:upload][:url]
 
@@ -62,18 +73,22 @@ class ClassifierRequestController < ApplicationController
           name = date.strftime('%b_%d_%Y_%H_%M_%S_url_request.jpg')
 
           path = File.join(dir, name)
-          
+
           open(path, 'wb') do |file|
             file << open(url).read
           end
-          puts "URL"
-          redirect_to result_path(img: name)
+
+          if image_valid?(path) then
+            redirect_to result_path(img: name)
+          else
+            redirect_to request_path(error: 'n_val')
+          end
       else
         redirect_to request_path(error: 'url')
       end
 
     else
-      redirect_to request_path(error: "path")
+      redirect_to request_path(error: 'path')
     end
 
 

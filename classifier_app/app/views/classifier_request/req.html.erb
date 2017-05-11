@@ -2,14 +2,18 @@
 
 	<p>Upload an Image</p>
 
-	<% if @error_message == "url" then%>
+	<% if @error_message == 'url' then%>
 		<div class="alert alert-danger fade in">
 	  	<strong>Error!</strong> "You have to enter a valid url !!"
 		</div>
-	<% elsif @error_message == "path" then%>
+	<% elsif @error_message == 'path' then%>
 		<div class="alert alert-danger fade in">
 	  	<strong>Error!</strong> "You have to select an image !!"
 		</div>
+	<% elsif @error_message == 'n_val' then%>
+			<div class="alert alert-danger fade in">
+				<strong>Error!</strong> "You have load valid image type !!"
+			</div>
 	<% end %>
 
 	<%= form_tag({controller: "classifier_request", action: "create"}, multipart: true) do%>
