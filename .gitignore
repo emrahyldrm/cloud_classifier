@@ -1,4 +1,4 @@
-
+classifier_app/app/assets/images/classifier_images/
 *.out
 *.jpg
 *.caffemodel
