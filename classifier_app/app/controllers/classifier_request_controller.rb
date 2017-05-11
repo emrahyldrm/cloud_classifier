@@ -2,6 +2,7 @@ require 'open3'
 require 'open-uri'
 require 'fileutils'
 require 'pathname'
+include  ClassifierRequestHelper
 
 
 class ClassifierRequestController < ApplicationController
@@ -11,9 +12,13 @@ class ClassifierRequestController < ApplicationController
     url.kind_of?(URI::HTTP) || url.kind_of?(URI::HTTPS)
   end 
 
+
   def req
     if params[:error] then
       @error_message = params[:error]
+    end
+    if !classifier_running? then
+      redirect_to root_path
     end
   end
 
@@ -53,16 +58,13 @@ class ClassifierRequestController < ApplicationController
     find_enlosing_image(path)
 
     @call = "python " + classifier + " " + path
-    #x = system("python", classifier, path, out: $stdout, err: :out)
-
     stdout, stderr, status = Open3.capture3(@call)
     output = stdout
     output["\n"] = ""
     r = output.split("-")
-    @prob = r[0][0..4]
-    @res = r[1].split(", ")
+    @prob    = r[0][0..4]
+    @res     = r[1].split(", ")
     @elapsed = r[2][0..3]
-
 
     nr = Request.new(user_id: current_user[:id], name: @name, result: @res, prob: @prob)
     nr.save
@@ -70,8 +72,11 @@ class ClassifierRequestController < ApplicationController
 
 
   def create
-    # if an image uploaded
-    if params[:upload] && params[:upload][:file] then
+
+    if !classifier_running? then
+      redirect_to root_path
+
+    elsif params[:upload] && params[:upload][:file] then      # if an image uploaded
     	name = params[:upload][:file].original_filename
     	dir = Rails.root.to_s + $classifier_images_path
     	date = DateTime.now
@@ -86,9 +91,9 @@ class ClassifierRequestController < ApplicationController
         redirect_to request_path(error: 'n_val')
       end
 
-
       # if this is a url rquest
-    elsif  (params[:upload] && params[:upload][:url]) && params[:upload][:url] != 0 && params[:upload][:url] != ".. or enter an url here" then      
+    elsif  (params[:upload] && params[:upload][:url]) && params[:upload][:url] != 0 && 
+            params[:upload][:url] != ".. or enter an url here" then      
       url = params[:upload][:url]
 
       if url_valid?(url) then

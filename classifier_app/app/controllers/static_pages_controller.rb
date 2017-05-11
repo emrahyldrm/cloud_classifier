@@ -1,6 +1,5 @@
 class StaticPagesController < ApplicationController
   def home
-  	@a = 5
   end
 
   def help

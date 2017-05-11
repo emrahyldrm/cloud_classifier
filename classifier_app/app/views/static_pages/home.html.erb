@@ -11,14 +11,19 @@
       <% if logged_in? %>
           <%= link_to "You can download class names here!", :action => :down %>
           <br><br>
-    	<%=		link_to "Upload Image", request_path, class: "btn btn-lg btn-warning" %>
-    <% else %>
+          <% if classifier_running? %>
+          	<%=		link_to "Upload Image", request_path, class: "btn btn-lg btn-warning" %>
+          <% end %>
+      <% else %>
     	<%=		link_to "Log in !", login_path, class: "btn btn-lg  btn-info" %>
       <%=		link_to "Sign up now!", signup_path, class: "btn btn-lg btn-success" %>
     <% end %>
-      <br>
+      <br>  
 
     <br><br><br><br><br><br>
+    <p style="border:3px; border-style:solid; border-color:#FFAAFF; padding: 1em; font-size:small" > 
+      You can use the system if the icon where up right corner of page is green. That shows classifier is running.
+    </p>
     <br><br><br><br><br><br>
     <br><br><br><br><br><br>
     </div>

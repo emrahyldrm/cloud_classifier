@@ -3,6 +3,11 @@
       <%= link_to "Cloud Classifier", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
+        <% if classifier_running? %>
+          <%= image_tag("greendot.png", alt:"GTU Logo", width: 20, height: 20) %>
+        <% else %>
+          <%= image_tag("reddot.png", alt:"GTU Logo", width: 20, height: 20) %>
+        <% end %>
         <li><%= link_to "Home", root_path %></li>
         <li><%= link_to "Help", help_path %></li>
         <% if logged_in? %>
