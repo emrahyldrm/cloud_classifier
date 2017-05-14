@@ -13,6 +13,8 @@
           <br><br>
           <% if classifier_running? %>
           	<%=		link_to "Upload Image", request_path, class: "btn btn-lg btn-warning" %>
+	<% else %>
+<p class= "btn btn-lg btn-warning"> Upload Image </p>
           <% end %>
       <% else %>
     	<%=		link_to "Log in !", login_path, class: "btn btn-lg  btn-info" %>
@@ -21,8 +23,8 @@
       <br>  
 
     <br><br><br><br><br><br>
-    <p style="border:3px; border-style:solid; border-color:#FFAAFF; padding: 1em; font-size:small" > 
-      You can use the system if the icon where up right corner of page is green. That shows classifier is running.
+    <p style="border:3px; border-style:solid; border-color:#e59c0b; padding: 1em; font-size:small" >
+      You can use the system if the icon where up right corner of page is green. That shows classifier module is running.
     </p>
     <br><br><br><br><br><br>
     <br><br><br><br><br><br>
