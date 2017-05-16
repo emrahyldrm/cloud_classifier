@@ -1,3 +1,5 @@
+require 'open3'
+
 module ClassifierRequestHelper
 	
 	def classifier_running?
