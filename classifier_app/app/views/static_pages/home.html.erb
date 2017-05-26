@@ -2,7 +2,7 @@
   <div class="center jumbotron">
     <div class="container" >
     <br><br>
-    <h1>Cloud Classifier App</h1>by Team Trappist-1
+    <h1>Cloud Classifier App</h1>
     <br><br>
       <p>
         A platform for classifying images. Alexnet was used as pretrained model.
@@ -13,8 +13,8 @@
           <br><br>
           <% if classifier_running? %>
           	<%=		link_to "Upload Image", request_path, class: "btn btn-lg btn-warning" %>
-	<% else %>
-<p class= "btn btn-lg btn-warning"> Upload Image </p>
+	       <% else %>
+            <p class= "btn btn-lg btn-warning"> Upload Image </p>
           <% end %>
       <% else %>
     	<%=		link_to "Log in !",     login_path,  class: "btn btn-lg  btn-info"   %>
