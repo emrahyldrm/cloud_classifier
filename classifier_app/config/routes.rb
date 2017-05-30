@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   get    '/login',    to: 'sessions#new'
   post   '/login',    to: 'sessions#create'
   delete '/logout',   to: 'sessions#destroy'
-
+  
+  get "*any", via: :all, to: 'application#page_not_found'
+  
   resources :users
 
 end
