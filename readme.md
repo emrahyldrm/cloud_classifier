@@ -4,4 +4,5 @@ The project contains two seperate modules.
 - A web interface that was written with Ruby on Rails
 - A client-server based classifier module (ImageNet - AlexNet - Caffe)
 
-http://classifier.emrahyildirim.me
+
+Site Link: [a link](http://classifier.emrahyildirim.me){:target="_blank"}
