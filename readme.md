@@ -5,4 +5,4 @@ The project contains two seperate modules.
 - A client-server based classifier module (ImageNet - AlexNet - Caffe)
 
 
-Site Link: [a link](http://classifier.emrahyildirim.me){:target="_blank"}
+http://classifier.emrahyildirim.me
