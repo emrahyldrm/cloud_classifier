@@ -3,12 +3,18 @@ require 'pathname'
 
 class UsersController < ApplicationController
   def show
-  	@user = User.find(params[:id])
-    if @user == current_user then
-      @requests = Request.where(user_id: current_user[:id])
-    else
+    begin
+      @user = User.find(params[:id])
+      if @user == current_user then
+        @requests = Request.where(user_id: current_user[:id])
+      else
+        redirect_to root_path
+      end
+    rescue ActiveRecord::RecordNotFound
       redirect_to root_path
     end
+
+
     
   end
   
