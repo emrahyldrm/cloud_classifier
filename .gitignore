@@ -3,4 +3,4 @@ classifier_app/app/assets/images/classifier_images/
 *.jpg
 *.caffemodel
 *.binaryproto
-
+*.idea
