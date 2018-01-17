@@ -13,9 +13,6 @@ class UsersController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       redirect_to root_path
     end
-
-
-    
   end
   
   def new
@@ -42,7 +39,7 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
   	if @user.save
       log_in @user
-  		flash[:success] = "Welocome to Cloud Classifier!"
+  		flash[:success] = "Welcome to Cloud Classifier!"
   		redirect_to @user
   	else
   		render 'new'

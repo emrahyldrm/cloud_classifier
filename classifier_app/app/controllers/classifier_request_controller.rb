@@ -17,7 +17,7 @@ class ClassifierRequestController < ApplicationController
     if params[:error] then
       @error_message = params[:error]
     end
-    if !classifier_running? then
+    if classifier_running? then
       redirect_to root_path
     end
   end
@@ -34,6 +34,7 @@ class ClassifierRequestController < ApplicationController
     end
     return true
   end
+
 
   def find_enlosing_image(path)
     dim = FastImage.size(path)
@@ -66,8 +67,14 @@ class ClassifierRequestController < ApplicationController
     @res     = r[1].split(", ")
     @elapsed = r[2][0..3]
 
-    nr = Request.new(user_id: current_user[:id], name: @name, result: @res, prob: @prob)
-    nr.save
+    if logged_in?
+      nr = Request.new(user_id: current_user[:id], name: @name, result: @res, prob: @prob)
+      nr.save
+    else
+      nr = Request.new(user_id: -1, name: "guest", result: @res, prob: @prob)
+      nr.save
+    end
+
   end
 
 
@@ -91,7 +98,7 @@ class ClassifierRequestController < ApplicationController
         redirect_to request_path(error: 'n_val')
       end
 
-      # if this is a url rquest
+      # if this is a url request
     elsif  (params[:upload] && params[:upload][:url]) && params[:upload][:url] != 0 && 
             params[:upload][:url] != ".. or enter an url here" then      
       url = params[:upload][:url]

@@ -1,33 +1,37 @@
 <div class="container" >
   <div class="center jumbotron">
     <div class="container" >
-    <br><br>
-    <h1>Cloud Classifier App</h1>
-    <br><br>
-      <p>
-        A platform for classifying images. ImageNet AlexNet model was used as pretrained model.
-      </p>
+      <br><br>
+      <h1> Online Image Classifier</h1>
+      <br><br>
 
-      <% if logged_in? %>
-          <%= link_to "You can download class names here!", :action => :down %>
-          <br><br>
-          <% if classifier_running? %>
-          	<%=		link_to "Upload Image", request_path, class: "btn btn-lg btn-warning" %>
-	       <% else %>
-            <p class= "btn btn-lg btn-warning"> Upload Image </p>
-          <% end %>
+      <%if logged_in?
+          upload_btn_text = "Upload Image"
+        else
+          upload_btn_text = "Demo"
+        end
+      %>
+      <% if classifier_running? %>
+        <%=		link_to upload_btn_text, request_path, class: "btn btn-lg btn-warning" %>
       <% else %>
-    	<%=		link_to "Log in !",     login_path,  class: "btn btn-lg  btn-info"   %>
-      <%=		link_to "Sign up now!", signup_path, class: "btn btn-lg btn-success" %>
-    <% end %>
-      <br>  
+        <p class= "btn btn-lg btn-danger"> <%= upload_btn_text %> </p>
+      <% end %>
+      <br>
+      <%= link_to "You can download class labels, here!", :action => :down %>
 
-    <br><br><br><br><br><br>
-    <p style="border:3px; border-style:solid; border-color:#e59c0b; padding: 1em; font-size:small" >
-      You can use the system if the icon where up right corner of page is green. That shows classifier module is running.
-    </p>
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br>
+      <br><br><br><br>
+
+      <p class="border" >
+        You can use the system if the icon where up right corner of page is green. That shows classifier module is running.<br>
+        Otherwise, both the icon and "Demo-Upload" button will be red.
+      </p>
+      <br><br>
+      <% if !logged_in? %>
+        <%=		link_to "Log in !",     login_path,  class: "btn btn-lg  btn-info"   %>
+        <%=		link_to "Sign up now!", signup_path, class: "btn btn-lg btn-success" %>
+      <% end %>
+      <br><br><br><br>
+      <br><br><br><br><br><br>
     </div>
   </div>
 </div>
