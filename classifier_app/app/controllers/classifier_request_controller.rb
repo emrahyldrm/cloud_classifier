@@ -17,7 +17,7 @@ class ClassifierRequestController < ApplicationController
     if params[:error] then
       @error_message = params[:error]
     end
-    if classifier_running? then
+    if !classifier_running? then
       redirect_to root_path
     end
   end
