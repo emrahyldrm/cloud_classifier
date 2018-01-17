@@ -191,10 +191,19 @@ input {
 td.col{
   width: 500px;
 }
+
 tr.row{
   width: 200px;
 }
 .jumbotronn{    
     background-color: #e6e6e6;
     text-align:center;
+}
+
+p.border{
+  border:3px;
+  border-style:solid;
+  border-color:#e59c0b;
+  padding: 1em;
+  font-size:small
 }
