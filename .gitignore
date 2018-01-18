@@ -4,3 +4,4 @@ classifier_app/app/assets/images/classifier_images/
 *.caffemodel
 *.binaryproto
 *.idea
+*.DS_Store
