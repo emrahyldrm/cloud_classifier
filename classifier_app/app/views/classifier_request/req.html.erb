@@ -19,7 +19,7 @@
 	<%= form_tag({controller: "classifier_request", action: "create"}, multipart: true) do%>
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <p> <%= file_field_tag 'upload[file]', class: "form-control" %> </p>
+      <p> <%= file_field_tag 'upload[file]', class: "form-control" %> </p> <i>Max 2mb</i>
       <p> <%= text_field_tag 'upload[url]', '.. or enter an url here' , class: "form-control", :focus => true, onfocus: "javascript: this.value = \"\"" %> </p> </p>
     </div>
   </div>

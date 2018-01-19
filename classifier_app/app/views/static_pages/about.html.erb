@@ -1,21 +1,17 @@
 <% provide(:title, "About") %>
-<h1>About Us</h1>
-<center>
-<p>
-  This is the web user interface for classification systems made by Team Trappist at Gebze Technical University.
-  <br>
-  You can classify an image with many algorithms such as neural networks, support vector machines and etc.
-  <br>
-  This project is built for Software Engineering Term Project.
-  <br>
+<div class="container">
+  <div class="jumbotron">
+    <div class="container" >
+      <div class="center page-header"><h3>About Project</h3></div>
+      <p>
+        This is an online image classifier that using neural networks(AlexNet) for predictions.<br>
+        Image url or an image from local computer can be used for classifying.<br>
+        The system makes predictions over 1000 separate classes. You can download class labels, <%= link_to "here!", :action => :down %><br>
+        <%= link_to "Caffe", "http://caffe.berkeleyvision.org" %> was used for prediction module. <br>
+        Prediction process may takes more time from what you expect because of Caffe is running on CPU mode.<br>
 
-  <%= link_to image_tag("nn.png", alt: "Neural Net", width: 400, height: 300) %>
-</center>
-  
-
-
-
-
-  <br><br><br><br><br><br>
-  <br><br><br><br><br><br>
-</p>
+        <%= link_to image_tag("nn.png", alt: "Neural Net", width: 400, height: 300) %>
+    </p>
+    </div>
+  </div>
+</div>

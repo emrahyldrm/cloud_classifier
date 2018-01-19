@@ -50,6 +50,9 @@ h2 {
   font-weight: normal;
   color: $gray-light;
 }
+h3{
+  font-size: 2em;
+}
 
 h3.error {
   color : red;
@@ -205,5 +208,7 @@ p.border{
   border-style:solid;
   border-color:#e59c0b;
   padding: 1em;
-  font-size:small
+  font-size:small;
+  font-weight: bold;
+
 }

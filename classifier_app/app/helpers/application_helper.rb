@@ -1,6 +1,6 @@
 module ApplicationHelper
 	def full_title(page_title = '')
-		base_title = "Cloud CLassifier Demo App"
+		base_title = "Cloud Cassifier"
 		if page_title.empty?
 			base_title
 		else
