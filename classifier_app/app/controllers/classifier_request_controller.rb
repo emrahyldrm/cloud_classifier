@@ -36,7 +36,7 @@ class ClassifierRequestController < ApplicationController
   end
 
 
-  def find_enlosing_image(path)
+  def find_enclosing_image(path)
     dim = FastImage.size(path)
     cols = dim[0]
     rows = dim[1]
@@ -56,7 +56,7 @@ class ClassifierRequestController < ApplicationController
     dir = Rails.root.to_s + $classifier_images_path
     classifier = Rails.root.to_s + "/../imagenet_demo/client.py"
     path = File.join(dir, @name)
-    find_enlosing_image(path)
+    find_enclosing_image(path)
 
     @call = "python " + classifier + " " + path
     stdout, stderr, status = Open3.capture3(@call)
@@ -74,12 +74,10 @@ class ClassifierRequestController < ApplicationController
       nr = Request.new(user_id: -1, name: "guest", result: @res, prob: @prob)
       nr.save
     end
-
   end
 
 
   def create
-
     if !classifier_running? then
       redirect_to root_path
 
