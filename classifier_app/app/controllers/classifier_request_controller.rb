@@ -94,12 +94,14 @@ class ClassifierRequestController < ApplicationController
         redirect_to result_path(img: name)
       else
         redirect_to request_path(error: 'n_val')
+        return
       end
 
       # if this is a url request
     elsif  (params[:upload] && params[:upload][:url]) && params[:upload][:url] != 0 && 
             params[:upload][:url] != ".. or enter an url here" then      
       url = params[:upload][:url]
+
 
       if url_valid?(url) then
           dir = Rails.root.to_s + $classifier_images_path
@@ -108,21 +110,31 @@ class ClassifierRequestController < ApplicationController
 
           path = File.join(dir, name)
 
-          open(path, 'wb') do |file|
-            file << open(url).read
+          begin
+            open(path, 'wb') do |file|
+              file << open(url).read
+            end
+          rescue OpenURI::HTTPError
+            redirect_to request_path(error: 'url')
+            return
           end
+
+
 
           if image_valid?(path) then
             redirect_to result_path(img: name)
           else
             redirect_to request_path(error: 'n_val')
+            return
           end
       else
         redirect_to request_path(error: 'url')
+        return
       end
 
     else
       redirect_to request_path(error: 'path')
+      return
     end
 
 
